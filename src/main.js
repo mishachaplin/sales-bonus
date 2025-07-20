@@ -52,8 +52,8 @@ function analyzeSalesData(data, options) {
   }
 
   // @TODO: Проверка наличия опций
-  const { calculateRevenue, calculateBonus } = options;
-  if (!calculateRevenue || !calculateBonus) {
+  const { calculateSimpleRevenue, calculateBonus } = options;
+  if (!calculateSimpleRevenue || !calculateBonus) {
     throw new Error("Не хватает функций");
   }
 
@@ -101,7 +101,7 @@ function analyzeSalesData(data, options) {
       if (!seller.products_sold[item.sku]) {
         seller.products_sold[item.sku] = 0;
       }
-      seller.products_sold[item.sku]++;
+      seller.products_sold[item.sku] += item.quantity;
       // По артикулу товара увеличить его проданное количество у продавца
     });
   });
