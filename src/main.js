@@ -18,16 +18,16 @@ function calculateSimpleRevenue(purchase, _product) {
  * @returns {number}
  */
 function calculateBonusByProfit(index, total, seller) {
-  // @TODO: Расчет бонуса от позиции в рейтинге
-  //const { profit } = seller;]
+  const { profit } = seller;
+
   if (index === 0) {
-    return 0.15;
+    return +(profit * 0.15);
   } else if (index === 1 || index === 2) {
-    return 0.1;
+    return +(profit * 0.10);
   } else if (index === total - 1) {
     return 0;
   } else {
-    return 0.05;
+    return +(profit * 0.05);
   }
 }
 
@@ -52,8 +52,8 @@ function analyzeSalesData(data, options) {
   }
 
   // @TODO: Проверка наличия опций
-  const { calculateSimpleRevenue, calculateBonus } = options;
-  if (!calculateSimpleRevenue || !calculateBonus) {
+  const { calculateRevenue, calculateBonus } = options;
+  if (!calculateRevenue || !calculateBonus) {
     throw new Error("Не хватает функций");
   }
 
